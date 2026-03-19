@@ -30,3 +30,19 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Notify Telegram on success
+        if: success()
+        run: |
+          curl -s -X POST \
+          "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=✅ CI passed: real-estate — ${{ github.event_name }} on ${{ github.ref_name }} (${{ github.sha }})"
+
+      - name: Notify Telegram on failure
+        if: failure()
+        run: |
+          curl -s -X POST \
+          "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=❌ CI failed: real-estate — ${{ github.event_name }} on ${{ github.ref_name }} (${{ github.sha }}) — Check: https://github.com/henrycode03/real-estate/actions"
