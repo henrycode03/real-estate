@@ -6,27 +6,13 @@ import { useState } from 'react';
 
 export default function Header() {
   const pathname = usePathname();
-  const [mounted] = useState(true);
+  const [mounted] = useState(false);
 
-  // Mount immediately to prevent hydration mismatch
-  // This avoids the need for useEffect which triggers lint warnings
+  // Use false to ensure client-side rendering from the start
+  // This prevents hydration mismatch and ensures proper routing
 
   if (!mounted) {
-    return (
-      <header>
-        <div className="container">
-          <div className="header-content">
-            <div className="logo">🏠 DreamHome Realty</div>
-            <nav className="nav">
-              <div className="nav-link">Home</div>
-              <div className="nav-link">Listings</div>
-              <div className="nav-link">About</div>
-              <div className="nav-link">Contact</div>
-            </nav>
-          </div>
-        </div>
-      </header>
-    );
+    return null;
   }
 
   const navLinks = [
