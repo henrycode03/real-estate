@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 
 interface PropertyGalleryProps {
@@ -20,10 +21,12 @@ export default function PropertyGallery({ images }: PropertyGalleryProps) {
   return (
     <div className="relative">
       <div className="aspect-[16/9] overflow-hidden rounded-lg bg-gray-100">
-        <img
+        <Image
           src={images[currentIndex] || '/api/placeholder/800/600'}
           alt={'Property image ' + (currentIndex + 1)}
-          className="h-full w-full object-cover"
+          fill
+          className="object-cover"
+          unoptimized
         />
       </div>
 

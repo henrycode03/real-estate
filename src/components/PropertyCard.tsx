@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Property } from '@/types/property';
 
 interface PropertyCardProps {
@@ -12,10 +13,12 @@ export default function PropertyCard({ property }: PropertyCardProps) {
     <Link href={`/property/${property.id}`} className="block">
       <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
         <div className="aspect-[4/3] overflow-hidden bg-gray-100">
-          <img
+          <Image
             src={property.images[0] || '/api/placeholder/400/300'}
             alt={property.address}
-            className="h-full w-full object-cover"
+            fill
+            className="object-cover"
+            unoptimized
           />
         </div>
         <div className="p-4">

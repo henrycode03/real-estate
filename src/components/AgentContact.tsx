@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Property } from '@/types/property';
 
 interface AgentContactProps {
@@ -8,10 +9,13 @@ export default function AgentContact({ agent }: AgentContactProps) {
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
       <div className="flex items-center gap-4">
-        <img
+        <Image
           src={agent.image || '/api/placeholder/150/150'}
           alt={agent.name}
+          width={80}
+          height={80}
           className="h-20 w-20 rounded-full object-cover"
+          unoptimized
         />
         <div>
           <h3 className="text-lg font-semibold text-gray-900">{agent.name}</h3>
